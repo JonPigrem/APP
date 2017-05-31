@@ -40,7 +40,7 @@ void setup() {
   println("Available ports: ");
   println(Serial.list());
 
-  String portName = Serial.list()[4];
+  String portName = Serial.list()[3];
 
   println("Opening port " + portName);
   gPort = new Serial(this, portName, gBaudRate);
@@ -57,14 +57,18 @@ void draw() {
   stroke(0);
   fill(200);
   rectMode(CORNER);
+  
+  oscP5.send(new OscMessage("/touch1").add(gCurrentNumTouches3), puredata);
+  oscP5.send(new OscMessage("/touch2").add(gCurrentNumTouches2), puredata);
+  oscP5.send(new OscMessage("/touch3").add(gCurrentNumTouches1), puredata);
 
   //------------------------- sensor 1
 
   rect(50, 50, 705, 150, 10);
 
-  for (int i = 0; i < gCurrentNumTouches1; i++) {
-    float displayLoc1 = map(gTouchLocations1[i], 0, gMaxTouchLocation, 0, gSensorWidth);
-    float displaySize1 = map(gTouchSizes1[i], 0, gMaxTouchSize, 
+  for (int i = 0; i < gCurrentNumTouches3; i++) {
+    float displayLoc1 = map(gTouchLocations3[i], 0, gMaxTouchLocation, 0, gSensorWidth);
+    float displaySize1 = map(gTouchSizes3[i], 0, gMaxTouchSize, 
       gSensorHeight * 0.1, gSensorHeight * 1.2);
 
     noStroke();
@@ -105,9 +109,9 @@ void draw() {
 
   rect(50, 450, 705, 150, 10);
 
-  for (int i = 0; i < gCurrentNumTouches3; i++) {
-    float displayLoc3 = map(gTouchLocations3[i], 0, gMaxTouchLocation, 0, gSensorWidth);
-    float displaySize3 = map(gTouchSizes3[i], 0, gMaxTouchSize, 
+  for (int i = 0; i < gCurrentNumTouches1; i++) {
+    float displayLoc3 = map(gTouchLocations1[i], 0, gMaxTouchLocation, 0, gSensorWidth);
+    float displaySize3 = map(gTouchSizes1[i], 0, gMaxTouchSize, 
       gSensorHeight * 0.1, gSensorHeight * 1.2);
 
     noStroke();
