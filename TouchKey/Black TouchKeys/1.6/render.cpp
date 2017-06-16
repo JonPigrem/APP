@@ -50,7 +50,8 @@ extern int sLastIndex[NUM_SENSORS];					// Last finger pressed on each sensor
 extern float sYTouches[NUM_SENSORS];                   // Overall Y touch location on each sensor
 extern float sSortedTouches[NUM_SENSORS][MAX_TOUCHES];	// X touch location for each finger on each sensor
 extern float sSize_[NUM_SENSORS][MAX_TOUCHES];			// Touch size for each finger on each sensor
-extern float speed;
+extern float speedX;
+extern float speedY;
 
 /*
  *  MODIFICATION
@@ -423,7 +424,8 @@ void render(BelaContext *context, void *userData)
         
   }
   
-  	libpd_float("speed", speed);
+  	libpd_float("speedX", speedX);
+  	libpd_float("speedY", speedY);
 
     //// FOR EACH SENSOR i, THE DATA SENT OUT TO PURE DATA IS ////
         // Ni       for number of finger touches

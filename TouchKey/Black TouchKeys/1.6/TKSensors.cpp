@@ -18,8 +18,10 @@ int sLastIndex[NUM_SENSORS];					// Last finger pressed on each sensor
 float sYTouches[NUM_SENSORS];                   // Overall Y touch location on each sensor
 float sSortedTouches[NUM_SENSORS][MAX_TOUCHES];	// X touch location for each finger on each sensor
 float sSize_[NUM_SENSORS][MAX_TOUCHES];			// Touch size for each finger on each sensor
-float speed;
-deque<float> Xdq(100, -1);
+float speedX;
+float speedY;
+deque<float> Xdq(100, 0);
+deque<float> Ydq(25, 0);
 
 // Temporary variable for reading sensors
 float sTouches_[NUM_SENSORS][MAX_TOUCHES];
@@ -282,13 +284,31 @@ void sensorLoop(void *)
 				
 				
 				
-				
+					if (sTouchNum[0] != 0) {
+
 				for (int h = 0; h < (signed)Xdq.size() - 1; h++)
 					Xdq.at(h) = Xdq.at(h + 1);
-	
+					
 				Xdq.at(99) = (sSortedTouches[0][0]);
-				speed = Xdq.at(98)-Xdq.at(0);
-	    		//printf("%f\n", speed);
+				speedX = Xdq.at(0)-Xdq.at(98);
+	    	
+	    		
+	    		
+	    		for (int h = 0; h < (signed)Ydq.size() - 1; h++)
+					Ydq.at(h) = Ydq.at(h + 1);
+	
+				Ydq.at(24) = (sYTouches[0]);
+				speedY = Ydq.at(0)-Ydq.at(23);
+	   
+				}
+	    		
+	    		
+	    		if (sTouchNum[0] == 0) {
+					Xdq.assign(100, 0);
+					Ydq.assign(25, 0);
+	    		}
+	    		
+	 
 			
 				/*
 				// Printing loop - To remove once the patch is connected to Pure Data ------------------
