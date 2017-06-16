@@ -1,4 +1,4 @@
-#N canvas 777 192 1726 1061 10;
+#N canvas 818 415 1726 1061 10;
 #X obj 1466 53 r N1;
 #X obj 1466 79 r L1;
 #X obj 1466 105 r Y1;
@@ -143,7 +143,7 @@
 #X obj 185 410 / 10;
 #X obj 218 100 metro 100;
 #X obj 67 692 dac~, f 6;
-#X obj 148 652 rev3~ 100 70 3000 20;
+#X obj 148 652 rev3~ 100 70 4000 0;
 #X connect 75 0 76 0;
 #X connect 76 0 78 0;
 #X connect 76 1 77 1;
