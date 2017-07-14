@@ -2,6 +2,10 @@ import processing.serial.*;
 import oscP5.*;
 import netP5.*;
 
+OscP5 oscP5;
+NetAddress puredata;
+
+
 // Communication
 Serial gPort;
 int gPortNumber = 2; 
@@ -31,7 +35,7 @@ void setup() {
   println("Available ports: ");
   println(Serial.list());
 
-  String portName = Serial.list()[3];
+  String portName = Serial.list()[5];
 
   println("Opening port " + portName);
   gPort = new Serial(this, portName, gBaudRate);
@@ -49,7 +53,7 @@ void draw() {
   fill(200);
   rectMode(CORNERS);
 
-  oscP5.send(new OscMessage("/touch1").add(gCurrentNumTouches1), puredata);
+  oscP5.send(new OscMessage("/touch").add(gCurrentNumTouches), puredata);
 
   rect(gMargin, gMargin, width - gMargin, height - gMargin, 10);
 
@@ -68,8 +72,10 @@ void draw() {
 
       ellipse(displayXLoc + gMargin, displayYLoc + gMargin, displayXSize, displayYSize);
 
-      oscP5.send(new OscMessage("/pos1").add(displayLoc1), puredata);
-      oscP5.send(new OscMessage("/size1").add(displaySize1), puredata);
+      oscP5.send(new OscMessage("/posX").add(displayXLoc), puredata);
+      oscP5.send(new OscMessage("/posY").add(displayYLoc), puredata);
+      oscP5.send(new OscMessage("/sizeX").add(displayXSize), puredata);
+      oscP5.send(new OscMessage("/sizeY").add(displayYSize), puredata);
     }
   }
 }
